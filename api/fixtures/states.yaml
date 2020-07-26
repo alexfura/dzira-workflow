@@ -1,0 +1,7 @@
+# api/fixtures/books.yaml
+App\Entity\State:
+  state_{1..5}:
+    id: <isbn13()>
+    title: <sentence(4)>
+    description: <text()>
+    publicationDate: <dateTime()>
