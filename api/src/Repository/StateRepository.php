@@ -19,4 +19,9 @@ class StateRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, State::class);
     }
+
+    public function findPossibleNextStatesFromState (State $state)
+    {
+
+    }
 }

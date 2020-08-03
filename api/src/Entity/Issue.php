@@ -1,15 +1,21 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Dto\IssueInput;
+use App\Dto\IssueOutput;
 use App\Repository\IssueRepository;
 use DateInterval;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     input=IssueInput::class,
+ *     output=IssueOutput::class
+ * )
  * @ORM\Entity(repositoryClass=IssueRepository::class)
  */
 class Issue
@@ -22,16 +28,15 @@ class Issue
     private ?int $id;
 
     /**
-     * @var string $title
      * @ORM\Column(name="title", type="string")
      */
     private string $title;
 
     /**
-     * @var string $title
+     * @var null|string $title
      * @ORM\Column(name="description", type="string", nullable=true)
      */
-    private string $description;
+    private ?string $description;
 
     /**
      * @var string $content
@@ -40,23 +45,23 @@ class Issue
     private string $content;
 
     /**
-     * @var User $assignee
+     * @var null|User $assignee
      * @ORM\ManyToOne(targetEntity="User", inversedBy="assignedIssues")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
      */
-    private User $assignee;
+    private ?User $assignee;
 
     /**
      * @var DateInterval $estimationTime
-     * @ORM\Column(name="estimation_time", type="dateinterval")
+     * @ORM\Column(name="estimation_time", type="dateinterval", nullable=true)
      */
-    private DateInterval $estimationTime;
+    private ?DateInterval $estimationTime;
 
     /**
      * @var ArrayCollection $subIssues
      * @ORM\ManyToMany(targetEntity="Issue", mappedBy="parentIssue")
      */
-    private ArrayCollection $subIssues;
+    private $subIssues;
 
     /**
      * @var ArrayCollection $parentIssue
@@ -70,7 +75,7 @@ class Issue
      *  }
      * )
      */
-    private ArrayCollection $parentIssue;
+    private $parentIssue;
 
     /**
      * @var State $state
@@ -96,17 +101,17 @@ class Issue
     }
 
     /**
-     * @return ArrayCollection
+     * @return mixed
      */
-    public function getParentIssue(): ArrayCollection
+    public function getParentIssue()
     {
         return $this->parentIssue;
     }
 
     /**
-     * @param ArrayCollection $parentIssue
+     * @param mixed $parentIssue
      */
-    public function setParentIssue(ArrayCollection $parentIssue): void
+    public function setParentIssue($parentIssue): void
     {
         $this->parentIssue = $parentIssue;
     }
@@ -128,17 +133,17 @@ class Issue
     }
 
     /**
-     * @return ArrayCollection
+     * @return mixed
      */
-    public function getSubIssues(): ArrayCollection
+    public function getSubIssues()
     {
         return $this->subIssues;
     }
 
     /**
-     * @param ArrayCollection $subIssues
+     * @param mixed $subIssues
      */
-    public function setSubIssues(ArrayCollection $subIssues): void
+    public function setSubIssues($subIssues): void
     {
         $this->subIssues = $subIssues;
     }
@@ -176,17 +181,17 @@ class Issue
     }
 
     /**
-     * @return User
+     * @return User|null
      */
-    public function getAssignee(): User
+    public function getAssignee(): ?User
     {
         return $this->assignee;
     }
 
     /**
-     * @param User $assignee
+     * @param null|User $assignee
      */
-    public function setAssignee(User $assignee): void
+    public function setAssignee(?User $assignee): void
     {
         $this->assignee = $assignee;
     }
@@ -200,9 +205,9 @@ class Issue
     }
 
     /**
-     * @param DateInterval $estimationTime
+     * @param null|DateInterval $estimationTime
      */
-    public function setEstimationTime(DateInterval $estimationTime): void
+    public function setEstimationTime(?DateInterval $estimationTime): void
     {
         $this->estimationTime = $estimationTime;
     }
@@ -226,7 +231,7 @@ class Issue
     /**
      * @return ArrayCollection
      */
-    public function getComments(): ArrayCollection
+    public function getComments(): Collection
     {
         return $this->comments;
     }
