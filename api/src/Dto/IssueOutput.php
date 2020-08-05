@@ -10,30 +10,55 @@ use Doctrine\Common\Collections\Collection;
 
 final class IssueOutput
 {
+    /**
+     * @var int|null $id
+     */
     public ?int $id;
 
+    /**
+     * @var string $title
+     */
     public string $title;
 
+    /**
+     * @var string $description
+     */
     public string $description;
 
+    /**
+     * @var string $content
+     */
     public string $content;
 
+    /**
+     * @var User|null $assignee
+     */
     public ?User $assignee = null;
 
+    /**
+     * @var DateInterval|null $estimationTime
+     */
     public ?DateInterval $estimationTime = null;
 
+    /**
+     * @var Collection|array $subIssues
+     */
     public  $subIssues;
 
-    public  $parentIssue;
+    /**
+     * @var Collection|array $parentIssue
+     */
+    public Collection $parentIssue;
 
+    /**
+     * @var State $state
+     */
     public State $state;
-
-    public $comments;
 
     /**
      * @var Collection|array
      */
-    public $validStates;
+    public Collection $comments;
 
     public function copyDataFromIssue(Issue $issue): void
     {

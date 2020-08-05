@@ -9,13 +9,6 @@ use App\Repository\StateRepository;
 
 class IssueOutputTransformer implements DataTransformerInterface
 {
-    private StateRepository $stateRepository;
-
-    public function __construct(StateRepository $stateRepository)
-    {
-        $this->stateRepository = $stateRepository;
-    }
-
     /**
      * @param Issue $object
      * @param string $to

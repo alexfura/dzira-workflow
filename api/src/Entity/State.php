@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -34,11 +35,30 @@ class State
     /**
      * @ORM\OneToMany(targetEntity="Issue", mappedBy="state")
      */
-    private $issues;
+    private Collection $issues;
+
+    /**
+     * @var Collection
+     * @ORM\ManyToMany(targetEntity="State", mappedBy="nextStates")
+     */
+    private Collection $previousStates;
+
+    /**
+     * @var Collection
+     * @ORM\ManyToMany(targetEntity="State", inversedBy="previousStates")
+     * @ORM\JoinTable(
+     *     name="state_transition",
+     *     joinColumns={@ORM\JoinColumn(name="previous_state_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="next_state_id", referencedColumnName="id")}
+     * )
+     */
+    private Collection $nextStates;
 
     public function __construct()
     {
         $this->issues = new ArrayCollection();
+        $this->previousStates = new ArrayCollection();
+        $this->nextStates = new ArrayCollection();
     }
 
     /**
@@ -82,9 +102,9 @@ class State
     }
 
     /**
-     * @return ArrayCollection
+     * @return Collection
      */
-    public function getIssues()
+    public function getIssues(): Collection
     {
         return $this->issues;
     }
@@ -95,5 +115,37 @@ class State
     public function setIssues($issues): void
     {
         $this->issues = $issues;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getPreviousStates(): Collection
+    {
+        return $this->previousStates;
+    }
+
+    /**
+     * @param Collection $previousStates
+     */
+    public function setPreviousStates(Collection $previousStates): void
+    {
+        $this->previousStates = $previousStates;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getNextStates(): Collection
+    {
+        return $this->nextStates;
+    }
+
+    /**
+     * @param Collection $nextStates
+     */
+    public function setNextStates(Collection $nextStates): void
+    {
+        $this->nextStates = $nextStates;
     }
 }
