@@ -5,7 +5,6 @@ namespace App\DataTransformer;
 use ApiPlatform\Core\DataTransformer\DataTransformerInterface;
 use App\Dto\IssueOutput;
 use App\Entity\Issue;
-use App\Repository\StateRepository;
 
 class IssueOutputTransformer implements DataTransformerInterface
 {
@@ -18,11 +17,17 @@ class IssueOutputTransformer implements DataTransformerInterface
     public function transform($object, string $to, array $context = [])
     {
         $issueOutput = new IssueOutput();
-        $issueOutput->copyDataFromIssue($object);
+        $issueOutput->fromIssue($object);
 
         return $issueOutput;
     }
 
+    /**
+     * @param array|object $data
+     * @param string $to
+     * @param array $context
+     * @return bool
+     */
     public function supportsTransformation($data, string $to, array $context = []): bool
     {
         return IssueOutput::class === $to && $data instanceof Issue;

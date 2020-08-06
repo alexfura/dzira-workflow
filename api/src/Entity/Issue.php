@@ -58,13 +58,13 @@ class Issue
     private ?DateInterval $estimationTime;
 
     /**
-     * @var ArrayCollection $subIssues
+     * @var Collection $subIssues
      * @ORM\ManyToMany(targetEntity="Issue", mappedBy="parentIssue")
      */
-    private $subIssues;
+    private Collection $subIssues;
 
     /**
-     * @var ArrayCollection $parentIssue
+     * @var Collection $parentIssue
      * @ORM\ManyToMany(targetEntity="Issue", inversedBy="subIssues")
      * @ORM\JoinTable(name="issues",
      *  joinColumns={
@@ -75,19 +75,19 @@ class Issue
      *  }
      * )
      */
-    private $parentIssue;
+    private Collection $parentIssue;
 
     /**
      * @var State $state
      * @ORM\ManyToOne(targetEntity="State", inversedBy="issues")
      */
-    private State $state;
+    private ?State $state = null;
 
     /**
-     * @var ArrayCollection $comments
+     * @var Collection $comments
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="issue")
      */
-    private $comments;
+    private Collection $comments;
 
     public function __construct()
     {
@@ -229,7 +229,7 @@ class Issue
     }
 
     /**
-     * @return ArrayCollection
+     * @return Collection
      */
     public function getComments(): Collection
     {
@@ -237,9 +237,9 @@ class Issue
     }
 
     /**
-     * @param ArrayCollection $comments
+     * @param Collection $comments
      */
-    public function setComments(ArrayCollection $comments): void
+    public function setComments(Collection $comments): void
     {
         $this->comments = $comments;
     }

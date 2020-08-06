@@ -148,4 +148,9 @@ class State
     {
         $this->nextStates = $nextStates;
     }
+
+    public function isInNextOrPreviousStates(State $state): bool
+    {
+        return $this->nextStates->contains($state) || $this->previousStates->contains($state);
+    }
 }

@@ -3,17 +3,20 @@
 namespace App\DataTransformer;
 
 use ApiPlatform\Core\DataTransformer\DataTransformerInterface;
+use ApiPlatform\Core\Validator\ValidatorInterface;
 use App\Dto\IssueInput;
 use App\Entity\Issue;
-use App\Validator\IssueValidator;
 
 class IssueInputTransformer implements DataTransformerInterface
 {
-    private IssueValidator $issueValidator;
+    /**
+     * @var ValidatorInterface $issueInputValidator
+     */
+    private ValidatorInterface $issueInputValidator;
 
-    public function __construct(IssueValidator $issueValidator)
+    public function __construct(ValidatorInterface $issueInputValidator)
     {
-        $this->issueValidator = $issueValidator;
+        $this->issueInputValidator = $issueInputValidator;
     }
 
     /**
@@ -21,11 +24,14 @@ class IssueInputTransformer implements DataTransformerInterface
      * @param string $to
      * @param array $context
      * @return Issue|object
+     * @throws \Exception
      */
     public function transform($object, string $to, array $context = [])
     {
+        $this->issueInputValidator->validate($object);
+
         $issue = new Issue();
-        $object->copyDataToIssue($issue);
+        $object->toIssue($issue);
 
         return $issue;
     }

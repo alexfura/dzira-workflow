@@ -60,7 +60,7 @@ final class IssueOutput
      */
     public Collection $comments;
 
-    public function copyDataFromIssue(Issue $issue): void
+    public function fromIssue(Issue $issue): void
     {
         $this->title = $issue->getTitle();
         $this->description = $issue->getDescription();
