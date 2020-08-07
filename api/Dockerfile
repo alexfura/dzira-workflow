@@ -22,6 +22,8 @@ RUN apk add --no-cache \
 	;
 
 ARG APCU_VERSION=5.1.18
+ARG XDEBUG_VERSION=2.9.2
+
 RUN set -eux; \
 	apk add --no-cache --virtual .build-deps \
 		$PHPIZE_DEPS \
@@ -39,11 +41,13 @@ RUN set -eux; \
 	; \
 	pecl install \
 		apcu-${APCU_VERSION} \
+		xdebug-$XDEBUG_VERSION \
 	; \
 	pecl clear-cache; \
 	docker-php-ext-enable \
 		apcu \
 		opcache \
+		xdebug \
 	; \
 	\
 	runDeps="$( \

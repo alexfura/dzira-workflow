@@ -12,6 +12,17 @@ services:
       context: ./api
       target: api_platform_php
       <<: *api-cache-from
+    environment:
+      # See https://docs.docker.com/docker-for-mac/networking/#i-want-to-connect-from-a-container-to-a-service-on-the-host
+      # See https://github.com/docker/for-linux/issues/264
+      # The `remote_host` below may optionally be replaced with `remote_connect_back`
+      XDEBUG_CONFIG: >-
+        remote_enable=1
+        remote_host=192.168.220.1
+        remote_connect_back=1
+        remote_port=9001
+        idekey=PHPSTORM
+      PHP_IDE_CONFIG: serverName=api-platform
     image: ${PHP_IMAGE:-quay.io/api-platform/php}
     healthcheck:
       interval: 10s
@@ -58,8 +69,8 @@ services:
   db:
     image: postgres:12-alpine
     environment:
-      - POSTGRES_DB=api
-      - POSTGRES_PASSWORD=!ChangeMe!
+      - POSTGRES_DB=dzhira
+      - POSTGRES_PASSWORD=postgres
       - POSTGRES_USER=api-platform
     volumes:
       - db-data:/var/lib/postgresql/data:rw
