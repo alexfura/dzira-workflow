@@ -58,13 +58,13 @@ class Issue
     private ?DateInterval $estimationTime;
 
     /**
-     * @var Collection $subIssues
+     * @var gitmixed $subIssues
      * @ORM\ManyToMany(targetEntity="Issue", mappedBy="parentIssue")
      */
-    private Collection $subIssues;
+    private $subIssues;
 
     /**
-     * @var Collection $parentIssue
+     * @var mixed $parentIssue
      * @ORM\ManyToMany(targetEntity="Issue", inversedBy="subIssues")
      * @ORM\JoinTable(name="issues",
      *  joinColumns={
@@ -75,7 +75,7 @@ class Issue
      *  }
      * )
      */
-    private Collection $parentIssue;
+    private $parentIssue;
 
     /**
      * @var State $state
@@ -84,10 +84,10 @@ class Issue
     private ?State $state = null;
 
     /**
-     * @var Collection $comments
+     * @var mixed $comments
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="issue")
      */
-    private Collection $comments;
+    private $comments;
 
     public function __construct()
     {
@@ -229,17 +229,17 @@ class Issue
     }
 
     /**
-     * @return Collection
+     * @return mixed
      */
-    public function getComments(): Collection
+    public function getComments()
     {
         return $this->comments;
     }
 
     /**
-     * @param Collection $comments
+     * @param mixed $comments
      */
-    public function setComments(Collection $comments): void
+    public function setComments($comments): void
     {
         $this->comments = $comments;
     }

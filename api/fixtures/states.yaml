@@ -1,6 +1,16 @@
-# api/fixtures/books.yaml
+# api/fixtures/states.yaml
+
 App\Entity\State:
-  state_{1..5}:
-    id: <isbn13()>
-    title: <sentence(4)>
-    description: <text()>
+  next_states_{1..5}:
+    title: <text(10)>
+    description: <text(20)>
+
+  previous_states_{1..5}:
+    title: <text(10)>
+    description: <text(20)>
+
+  states_:
+    title: <text(10)>
+    description: <text(20)>
+    nextStates: '@next_states_{1..5}'
+    previousStates: '@previous_states_{1..5}'

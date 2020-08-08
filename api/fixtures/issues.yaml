@@ -1,0 +1,22 @@
+# api/fixtures/issues.yaml
+
+App\Entity\Issue:
+  sub_issues_{1..10}:
+    title: <text(10)>
+    content: <text(122)>
+    description: <text(20)>
+    state: '@states_*'
+
+  parent_issues_{1..10}:
+    title: <text(10)>
+    content: <text(122)>
+    description: <text(20)>
+    state: '@states_*'
+
+  issues_{1..10}:
+    title: <text(10)>
+    content: <text(122)>
+    description: <text(20)>
+    state: '@states_*'
+    parentIssue: '@parent_issues_{1..3}'
+    subIssues: '@sub_issues_{1..3}'

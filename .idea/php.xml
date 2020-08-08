@@ -119,6 +119,8 @@
       <path value="$PROJECT_DIR$/api/vendor/symfony/test-pack" />
       <path value="$PROJECT_DIR$/api/vendor/symfony/dom-crawler" />
       <path value="$PROJECT_DIR$/api/vendor/justinrainbow/json-schema" />
+      <path value="$PROJECT_DIR$/api/vendor/symfony/polyfill-php80" />
+      <path value="$PROJECT_DIR$/api/vendor/symfony/polyfill-intl-normalizer" />
     </include_path>
   </component>
   <component name="PhpInterpreters">

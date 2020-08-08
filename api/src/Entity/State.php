@@ -33,18 +33,19 @@ class State
     private string $description;
 
     /**
+     * @var mixed $issues
      * @ORM\OneToMany(targetEntity="Issue", mappedBy="state")
      */
-    private Collection $issues;
+    private $issues;
 
     /**
-     * @var Collection
+     * @var mixed $previousStates
      * @ORM\ManyToMany(targetEntity="State", mappedBy="nextStates")
      */
-    private Collection $previousStates;
+    private $previousStates;
 
     /**
-     * @var Collection
+     * @var mixed $nextStates
      * @ORM\ManyToMany(targetEntity="State", inversedBy="previousStates")
      * @ORM\JoinTable(
      *     name="state_transition",
@@ -52,7 +53,7 @@ class State
      *     inverseJoinColumns={@ORM\JoinColumn(name="next_state_id", referencedColumnName="id")}
      * )
      */
-    private Collection $nextStates;
+    private $nextStates;
 
     public function __construct()
     {
@@ -102,9 +103,9 @@ class State
     }
 
     /**
-     * @return Collection
+     * @return mixed
      */
-    public function getIssues(): Collection
+    public function getIssues()
     {
         return $this->issues;
     }
@@ -118,33 +119,33 @@ class State
     }
 
     /**
-     * @return Collection
+     * @return mixed
      */
-    public function getPreviousStates(): Collection
+    public function getPreviousStates()
     {
         return $this->previousStates;
     }
 
     /**
-     * @param Collection $previousStates
+     * @param mixed $previousStates
      */
-    public function setPreviousStates(Collection $previousStates): void
+    public function setPreviousStates( $previousStates): void
     {
         $this->previousStates = $previousStates;
     }
 
     /**
-     * @return Collection
+     * @return mixed
      */
-    public function getNextStates(): Collection
+    public function getNextStates()
     {
         return $this->nextStates;
     }
 
     /**
-     * @param Collection $nextStates
+     * @param mixed $nextStates
      */
-    public function setNextStates(Collection $nextStates): void
+    public function setNextStates($nextStates): void
     {
         $this->nextStates = $nextStates;
     }
