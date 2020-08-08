@@ -8,7 +8,6 @@ use App\Dto\IssueOutput;
 use App\Repository\IssueRepository;
 use DateInterval;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -58,7 +57,7 @@ class Issue
     private ?DateInterval $estimationTime;
 
     /**
-     * @var gitmixed $subIssues
+     * @var mixed $subIssues
      * @ORM\ManyToMany(targetEntity="Issue", mappedBy="parentIssue")
      */
     private $subIssues;
@@ -197,9 +196,9 @@ class Issue
     }
 
     /**
-     * @return DateInterval
+     * @return null|DateInterval
      */
-    public function getEstimationTime(): DateInterval
+    public function getEstimationTime(): ?DateInterval
     {
         return $this->estimationTime;
     }

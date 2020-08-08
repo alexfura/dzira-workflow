@@ -16,18 +16,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="757c5ff2-6f92-4e16-9def-19a3beaf9ffb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Issue.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Issue.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="develop" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
@@ -163,7 +168,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -176,6 +181,7 @@
       <option name="presentableId" value="Default" />
       <updated>1596898091998</updated>
       <workItem from="1596898093249" duration="1399000" />
+      <workItem from="1596901262534" duration="311000" />
     </task>
     <task id="LOCAL-00001" summary="Added empty tests for Issue and State.">
       <created>1596900645435</created>
@@ -198,7 +204,21 @@
       <option name="project" value="LOCAL" />
       <updated>1596900806055</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Added empty tests for Issue and State.">
+      <created>1596901296844</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1596901296844</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Merge into develop">
+      <created>1596901407607</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1596901407607</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -214,16 +234,23 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added empty tests for Issue and State, .env added to gitignore." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added empty tests for Issue and State, .env added to gitignore." />
+    <MESSAGE value="Added empty tests for Issue and State." />
+    <MESSAGE value="Merge into develop" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge into develop" />
   </component>
   <component name="WindowStateProjectService">
     <state x="789" y="380" width="337" height="285" key="#Other_File_Types" timestamp="1596901117659">
       <screen x="0" y="0" width="1920" height="1045" />
     </state>
     <state x="789" y="380" width="337" height="285" key="#Other_File_Types/0.0.1920.1045@0.0.1920.1045" timestamp="1596901117659" />
+    <state x="97" y="100" width="1726" height="848" key="DiffContextDialog" timestamp="1596901592158">
+      <screen x="0" y="0" width="1920" height="1045" />
+    </state>
+    <state x="97" y="100" width="1726" height="848" key="DiffContextDialog/0.0.1920.1045@0.0.1920.1045" timestamp="1596901592158" />
     <state x="743" y="282" width="430" height="481" key="FileChooserDialogImpl" timestamp="1596901242931">
       <screen x="0" y="0" width="1920" height="1045" />
     </state>
@@ -232,5 +259,13 @@
       <screen x="0" y="0" width="1920" height="1045" />
     </state>
     <state x="767" y="428" key="GitRewordDialog/0.0.1920.1045@0.0.1920.1045" timestamp="1596901014116" />
+    <state x="585" y="287" width="746" height="470" key="MultipleFileMergeDialog" timestamp="1596901390488">
+      <screen x="0" y="0" width="1920" height="1045" />
+    </state>
+    <state x="585" y="287" width="746" height="470" key="MultipleFileMergeDialog/0.0.1920.1045@0.0.1920.1045" timestamp="1596901390488" />
+    <state x="680" y="237" width="555" height="570" key="RollbackChangesDialog" timestamp="1596901288131">
+      <screen x="0" y="0" width="1920" height="1045" />
+    </state>
+    <state x="680" y="237" width="555" height="570" key="RollbackChangesDialog/0.0.1920.1045@0.0.1920.1045" timestamp="1596901288131" />
   </component>
 </project>
