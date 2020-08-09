@@ -1,6 +1,8 @@
 <template>
     <v-row align-content="center">
         <Column></Column>
+        <Column></Column>
+        <Column></Column>
     </v-row>
 </template>
 
