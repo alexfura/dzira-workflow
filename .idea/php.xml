@@ -121,6 +121,7 @@
       <path value="$PROJECT_DIR$/api/vendor/justinrainbow/json-schema" />
       <path value="$PROJECT_DIR$/api/vendor/symfony/polyfill-php80" />
       <path value="$PROJECT_DIR$/api/vendor/symfony/polyfill-intl-normalizer" />
+      <path value="$PROJECT_DIR$/api/vendor/bin/.phpunit" />
     </include_path>
   </component>
   <component name="PhpInterpreters">

@@ -3,19 +3,17 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
-use App\Dto\IssueInput;
-use App\Dto\IssueOutput;
+use App\Exception\InvalidStateTransitionException;
 use App\Repository\IssueRepository;
 use DateInterval;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ApiResource(
- *     input=IssueInput::class,
- *     output=IssueOutput::class
- * )
+ * @ApiResource()
  * @ORM\Entity(repositoryClass=IssueRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class Issue
 {
@@ -28,6 +26,7 @@ class Issue
 
     /**
      * @ORM\Column(name="title", type="string")
+     * @Assert\NotBlank
      */
     private string $title;
 
@@ -35,11 +34,12 @@ class Issue
      * @var null|string $title
      * @ORM\Column(name="description", type="string", nullable=true)
      */
-    private ?string $description;
+    private ?string $description = null;
 
     /**
      * @var string $content
      * @ORM\Column(name="content", type="string")
+     * @Assert\NotBlank
      */
     private string $content;
 
@@ -48,13 +48,13 @@ class Issue
      * @ORM\ManyToOne(targetEntity="User", inversedBy="assignedIssues")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
      */
-    private ?User $assignee;
+    private ?User $assignee = null;
 
     /**
      * @var DateInterval $estimationTime
      * @ORM\Column(name="estimation_time", type="dateinterval", nullable=true)
      */
-    private ?DateInterval $estimationTime;
+    private ?DateInterval $estimationTime = null;
 
     /**
      * @var mixed $subIssues
@@ -79,6 +79,8 @@ class Issue
     /**
      * @var State $state
      * @ORM\ManyToOne(targetEntity="State", inversedBy="issues")
+     * @ORM\JoinColumn(name="state_id", referencedColumnName="id", nullable=false)
+     *
      */
     private ?State $state = null;
 
@@ -221,9 +223,14 @@ class Issue
 
     /**
      * @param State $state
+     * @throws InvalidStateTransitionException
      */
     public function setState(State $state): void
     {
+        if(null !== $this->state && !$this->state->isInNextOrPreviousStates($state)) {
+            throw new InvalidStateTransitionException();
+        }
+
         $this->state = $state;
     }
 
