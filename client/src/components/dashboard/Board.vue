@@ -1,14 +1,16 @@
 <template>
-    <v-responsive>
+    <v-container fluid>
+        <TaskSearch></TaskSearch>
         <Group></Group>
-    </v-responsive>
+    </v-container>
 </template>
 
 <script>
     import Group from "./Group";
+    import TaskSearch from "./TaskSearch";
     export default {
         name: "Dashboard",
-        components: {Group}
+        components: {TaskSearch, Group}
     }
 </script>
 
