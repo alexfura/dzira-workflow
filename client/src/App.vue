@@ -5,15 +5,27 @@
             app
     >
       <v-list dense>
-        <!-- Dashboard -->
+
+        <!-- Backlog -->
         <v-list-item link>
           <v-list-item-action>
-            <v-icon>mdi-home</v-icon>
+            <v-icon></v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Backlog</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <!-- Board -->
+        <v-list-item :to="{name: 'boards'}">
+          <v-list-item-action>
+            <v-icon></v-icon>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>Boards</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+
         <!-- Reports -->
         <v-list-item link>
           <v-list-item-action>
@@ -35,7 +47,7 @@
       <v-toolbar-title>Application</v-toolbar-title>
     </v-app-bar>
     <v-main>
-      <Dashboard></Dashboard>
+      <router-view />
     </v-main>
     <v-footer
             color="indigo"
@@ -45,13 +57,9 @@
     </v-footer>
   </v-app>
 </template>
-
 <script>
-  import Dashboard from "./components/dashboard/Board";
+
   export default {
-    components: {
-      Dashboard
-    },
     props: {
       source: String,
     },

@@ -9,7 +9,7 @@
     import Group from "./Group";
     import TaskSearch from "./TaskSearch";
     export default {
-        name: "Dashboard",
+        name: "Board",
         components: {TaskSearch, Group}
     }
 </script>

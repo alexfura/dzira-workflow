@@ -46,5 +46,6 @@
     }
     .column-background {
         background-color: #d8e8eb;
+        border-radius: 3px;
     }
 </style>
