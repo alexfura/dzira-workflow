@@ -1,15 +1,40 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\SerializedName;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="dzhira_user")
+ * @ApiResource(
+ *     collectionOperations={
+ *          "get" = {
+ *              "normalization_context"={"groups"={"user:get"}}
+ *          },
+ *          "post" = {
+ *              "denormalization_context"={"groups" ={"user:post"}}
+ *          }
+ *     },
+ *     itemOperations={
+ *          "get" = {
+ *              "normalization_context"={"groups"={"user:get"}}
+ *          },
+ *          "put" = {
+ *              "denormalization_context"={"groups" ={"user:put"}}
+ *          },
+ *          "delete"
+ *     }
+ * )
+ * @UniqueEntity(fields={"email"})
  */
 class User implements UserInterface
 {
@@ -17,16 +42,20 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups("user:get")
      */
     private ?int $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Groups({"user:post", "user:get"})
+     * @Assert\Email()
      */
     private string $email;
 
     /**
      * @ORM\Column(type="json")
+     * @Groups({"user:put"})
      */
     private array $roles = [];
 
@@ -37,10 +66,33 @@ class User implements UserInterface
     private string $password;
 
     /**
-     * @var ArrayCollection $assignedIssues
-     * @ORM\OneToMany(targetEntity="Issue", mappedBy="assignee")
+     * @var string $name
      */
-    private ArrayCollection $assignedIssues;
+    private string $name;
+
+    /**
+     * @var string $surname
+     */
+    private string $surname;
+
+    /**
+     * @var string $position
+     */
+    private ?string $position;
+
+    /**
+     * @var null|string $plainPassword
+     * @SerializedName("password")
+     * @Groups({"user:post", "user:put"})
+     */
+    private ?string $plainPassword = null;
+
+    /**
+     * @var mixed $assignedIssues
+     * @ORM\OneToMany(targetEntity="Issue", mappedBy="assignee")
+     * @Groups({"user:put", "user:get"})
+     */
+    private $assignedIssues;
 
     public function __construct()
     {
@@ -117,11 +169,42 @@ class User implements UserInterface
     }
 
     /**
+     * @return string
+     */
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param string $plainPassword
+     */
+    public function setPlainPassword(string $plainPassword): void
+    {
+        $this->plainPassword = $plainPassword;
+    }
+
+    /**
      * @see UserInterface
      */
     public function eraseCredentials()
     {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+         $this->plainPassword = null;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAssignedIssues()
+    {
+        return $this->assignedIssues;
+    }
+
+    /**
+     * @param mixed $assignedIssues
+     */
+    public function setAssignedIssues($assignedIssues): void
+    {
+        $this->assignedIssues = $assignedIssues;
     }
 }
